@@ -1,0 +1,11 @@
+<p *ngIf=" ( ((actualPage-1) * recordsByPage)+1 ) <= recordsTotal">
+    Mostrado {{ ((actualPage-1) * recordsByPage)+1}} a
+    <span *ngIf="recordsTotal>=(actualPage * recordsByPage); else otherCase"> 
+      {{ actualPage * recordsByPage}}
+    </span>
+    <ng-template #otherCase>
+        {{recordsTotal}}
+    </ng-template>
+    de: {{recordsTotal}}
+
+</p>

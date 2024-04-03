@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{titulo}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <p><strong>{{texto}}</strong></p>
+    <p *ngIf="information">
+        <textarea class="form-control" rows="10" cols="50" readonly>{{information}}</textarea>
+    </p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="activeModal.close('Close click')">Cerrar</button>
+</div>

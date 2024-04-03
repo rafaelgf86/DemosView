@@ -1,0 +1,21 @@
+<div class="alert alert-danger" role="alert" *ngIf="serverErrors && serverErrors.length > 0">
+    Ocurrieron los siguientes errores al procesar la petición:
+    <ul>
+        <li *ngFor="let serverError of serverErrors">{{ serverError.error }}</li>
+    </ul>
+</div>
+
+<!-- 
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="serverErrors">
+    Ocurrieron los siguientes errores al procesar la petición
+    <ul>
+        <li *ngFor="let serverError of serverErrors">
+            {{ serverError.error }}
+        </li>
+    </ul>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+-->

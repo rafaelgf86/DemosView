@@ -1,0 +1,28 @@
+<div class="container mb-4" *ngIf="version">
+    <div class="text-center header">
+        <img src="./assets/img/logo-intx.png" alt="" height="200px" width="200px" alt="">
+        <br> <br>
+        <h2>Sistema de Gestión de Certificados</h2>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <div class="card border-light mb-3">
+                <div class="card-header text-white bg-dark">Información</div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <strong>Versión: </strong> {{ version.versionNumber }}
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <strong>Fecha de Instalación: </strong> {{ version.versionDate | date:'dd/MM/yyyy' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-loading [loading]="loading"></app-loading>
+
+<!-- {{ version | json }} -->

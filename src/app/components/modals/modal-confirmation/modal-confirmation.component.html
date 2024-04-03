@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-describedby="modal-title" (click)="activeModal.close(null)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <p><strong><span class="text-primary">{{name}}</span> {{type}}</strong></p>
+    <p>{{aditionalData}}</p>
+    <p *ngIf="showWarning">
+        <span class="text-danger">{{warning}}</span>
+    </p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close(false)">Cancelar</button>
+    <button type="button" class="btn btn-success" (click)="activeModal.close(true)">Aceptar</button>
+</div>

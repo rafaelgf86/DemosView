@@ -1,0 +1,77 @@
+<div class="h-100" [style]="back">
+    <div style="padding-bottom: 30px; padding-top: 50px" class="row  justify-content-center align-items-center">
+        <img *ngIf="settings?.logo" [src]="settings?.logo | resourceimage" [width]="settings?.logoWith" [height]="settings?.logoHeigth">
+    </div>
+    <div class="row justify-content-center align-items-center">
+        <div class="card">
+            <h4 class="card-header">
+                <div class="row row-container align-items-center">
+                    <div class="col-md-12 ico-intx" [style]="ico">
+                        {{ 'login.title' | translate }}
+                    </div>
+                </div>
+            </h4>
+            <div class="card-body">
+
+                <div class="alert alert-danger" role="alert" *ngIf="expired">
+                    La sessión expiró
+                </div>
+
+                <div class="alert alert-danger" role="alert" *ngIf="credencialesIncorrectas">
+                    {{ errorMessage }}
+                </div>
+
+                <div class="alert alert-success" role="alert" *ngIf="credencialesCorrectas">
+                    User Identified!
+                </div>
+
+                <form data-toggle="validator" role="form" method="post" action="#">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>
+                                    {{ 'login.user' | translate }}
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    </div>
+                                    <input [(ngModel)]="user.username" #uname="ngModel" type="text" class="form-control" name="login_email" value="rgarcia" pattern=".{4,}" title="Cuatro(4) o mas caracteres" required (keyup.enter)="login()">
+                                </div>
+                                <div class="help-block with-errors text-danger"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>
+                                    {{ 'login.password' | translate }}
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-unlock" aria-hidden="true"></i></span>
+                                    </div>
+                                    <input [(ngModel)]="user.password" #passw="ngModel" type="password" name="login_password" class="form-control" value="admin@123" pattern=".{1,}" title="At least one character" required (keyup.enter)="login()">
+                                </div>
+                                <div class="help-block with-errors text-danger"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="hidden" name="redirect" value="">
+                            <button type="button" name="button" class="btn btn-primary btn-lg btn-block" (click)="login()" [disabled]="loading || uname.invalid || passw.invalid">
+                                    <i class="fa" [ngClass]="{'fa-refresh fa-spin':loading}"></i>
+                                    {{ 'login.login' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-loading [loading]="loading"></app-loading>

@@ -1,0 +1,52 @@
+<div class="text-left">
+    <h2>Dirección</h2>
+</div>
+
+<div class="form-row">
+    <div class="form-group col-md-8">
+        <label for="inputStreet">Calle</label>
+        <input [(ngModel)]="elementForm.address.street" name="address.street" type="text" class="form-control" id="inputStreet" placeholder="1234 Main St">
+    </div>
+    <div class="form-group col-md-2">
+        <label for="inputExteriorNumber">Número Exterior</label>
+        <input [(ngModel)]="elementForm.address.exteriorNumber" name="address.exteriorNumber" type="text" class="form-control" id="inputExteriorNumber">
+    </div>
+    <div class="form-group col-md-2">
+        <label for="inputInteriorNumber">Número Interior</label>
+        <input [(ngModel)]="elementForm.address.interiorNumber" name="address.interiorNumber" type="text" class="form-control" id="inputInteriorNumber">
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group col-md-1">
+        <label for="inputZip">Código Postal</label>
+        <input [(ngModel)]="elementForm.address.sepomex.sepomexId.dCodigo" name="address.sepomex.sepomexId.dCodigo" type="text" class="form-control" id="inputZip" (change)="getSepomex()">
+    </div>
+
+    <div class="form-group col-md-3">
+        <label for="inputEstado">Estado</label>
+        <span *ngIf="loadingEstados" class="form-control-plaintext"><app-loading-img></app-loading-img></span>
+        <select *ngIf="!loadingEstados" [(ngModel)]="elementForm.address.sepomex.sepomexId.cEstado" name="address.sepomex.sepomexId.cEstado" id="inputEstado" class="form-control custom-select" (change)="getMunicipios()">
+            <option selected value="0">Seleccione un estado</option>
+            <option *ngFor="let estado of estados" [value]="estado.cEstado">{{estado.dEstado}}</option>
+        </select>
+    </div>
+
+    <div class="form-group col-md-4">
+        <label for="inputMuni">Municipio</label>
+        <span *ngIf="loadingMunicipios" class="form-control-plaintext"><app-loading-img></app-loading-img></span>
+        <select *ngIf="!loadingMunicipios" [(ngModel)]="elementForm.address.sepomex.sepomexId.cMnpio" name="address.sepomex.sepomexId.cMnpio" id="inputMuni" class="form-control custom-select" (change)="getAsentamientos()">
+            <option value="0">Seleccione una delegación</option>
+            <option *ngFor="let municipio of municipios" [value]="municipio.cMnpio">{{municipio.dMnpio}}</option>
+        </select>
+    </div>
+
+    <div class="form-group col-md-4">
+        <label for="inputColonia">Colonia</label>
+        <span *ngIf="loadingAsentamientos" class="form-control-plaintext"><app-loading-img></app-loading-img></span>
+        <select *ngIf="!loadingAsentamientos" [(ngModel)]="elementForm.address.sepomex.sepomexId.idAsentaCpcons" name="address.sepomex.sepomexId.idAsentaCpcons" id="inputColonia" class="form-control custom-select" (change)="selectAsentamiento($event)">
+            <option selected value="0" >Seleccione una colonia</option>
+            <option  *ngFor="let asentamiento of asentamientos" [value]="asentamiento.idAsentaCpcons">{{asentamiento.dAsenta}}</option>
+        </select>
+    </div>
+</div>

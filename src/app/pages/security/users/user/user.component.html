@@ -1,0 +1,154 @@
+<app-title-drawer (drawer)="drawer()" [title]="title" image="fas fa-users"></app-title-drawer>
+
+<form #forma="ngForm" (ngSubmit)="save(forma)" *ngIf="user">
+
+    <app-errors-server #errorsServer></app-errors-server>
+
+    <div class="form-group" *ngIf="user.userPhoto && user.userPhoto.fileData != ''">
+        <div class="col-12 text-center holder">
+            <img class="s-20" [src]="user.userPhoto | resourceimage" />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="inputBusinessName">Nombre</label>
+            <input minlength="1" required [(ngModel)]="user.name" name="name" type="text" class="form-control" id="inputBusinessName" [ngClass]="{'is-invalid': (forma.controls['name']?.touched && forma.controls['name']?.errors ) || user.errorFormUser?.name }">
+            <div class="invalid-feedback" *ngIf="forma.controls['name']?.touched && forma.controls['name']?.errors">
+                <div *ngIf="forma.controls['name']?.errors.required">
+                    Nombre es requerido
+                </div>
+                <div *ngIf="forma.controls['name']?.errors.minlength">
+                    El Nombre debe ser de al menos 4 letras
+                </div>
+            </div>
+            <!-- Errores del servidor -->
+            <div class="invalid-feedback">{{user.errorFormUser?.name}}</div>
+
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputLastNameP">Apellido Paterno</label>
+            <input minlength="4" required [(ngModel)]="user.lastNameP" name="lastNameP" type="text" class="form-control" id="inputLastNameP" [ngClass]="{'is-invalid': (forma.controls['lastNameP']?.touched && forma.controls['lastNameP']?.errors ) || user.errorFormUser?.lastNameP }">
+            <div class="invalid-feedback" *ngIf="forma.controls['lastNameP']?.touched && forma.controls['lastNameP']?.errors">
+                <div *ngIf="forma.controls['lastNameP']?.errors.required">
+                    Apellido Paterno es requerido
+                </div>
+                <div *ngIf="forma.controls['lastNameP']?.errors.minlength">
+                    Apellido Paterno debe ser de al menos 4 letras
+                </div>
+            </div>
+            <!-- Errores del servidor -->
+            <div class="invalid-feedback">{{user.errorFormUser?.lastNameP}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputLastNameM">Apellido Materno</label>
+            <input minlength="4" required [(ngModel)]="user.lastNameM" name="lastNameM" type="text" class="form-control" id="inputLastNameM" [ngClass]="{'is-invalid': (forma.controls['lastNameM']?.touched && forma.controls['lastNameM']?.errors ) || user.errorFormUser?.lastNameM}">
+            <div class="invalid-feedback" *ngIf="forma.controls['lastNameM']?.touched && forma.controls['lastNameM']?.errors">
+                <div *ngIf="forma.controls['lastNameM']?.errors.required">
+                    Apellido Materno es requerido
+                </div>
+                <div *ngIf="forma.controls['lastNameM']?.errors.minlength">
+                    Apellido Materno debe ser de al menos 4 letras
+                </div>
+            </div>
+            <!-- Errores del servidor -->
+            <div class="invalid-feedback">{{user.errorFormUser?.lastNameM}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <app-file-upload [elementForm]="user" [resourceName]="'userPhoto'" [textField]="'Foto'"></app-file-upload>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="inputUsername">Usuario</label>
+            <input minlength="4" required [(ngModel)]="user.username" name="username" type="text" class="form-control" id="inputUsername" [ngClass]="{'is-invalid': (forma.controls['username']?.touched && forma.controls['username']?.errors ) || user.errorFormUser?.username }"
+                [readonly]="user.idUser !== 0">
+            <div class="invalid-feedback" *ngIf="forma.controls['username']?.touched && forma.controls['username']?.errors">
+                <div *ngIf="forma.controls['username']?.errors.required">
+                    Nombre de Usuario requerido
+                </div>
+                <div *ngIf="forma.controls['username']?.errors.minlength">
+                    El Nombre de Usuario debe ser de al menos 4 letras
+                </div>
+            </div>
+            <!-- Errores del servidor -->
+            <div class="invalid-feedback">{{user.errorFormUser?.username}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputProfile">Perfil</label>
+            <span *ngIf="loadingProfiles" class="form-control-plaintext"><app-loading-img></app-loading-img></span>
+            <select *ngIf="!loadingProfiles" [(ngModel)]="user.profile.idProfile" name="profile.idProfile" id="inputProfile" class="form-control custom-select" [ngClass]="{'is-invalid': user.errorFormUser?.profile}">
+                <option selected value="0">Seleccione un perfil</option>
+                <option *ngFor="let profile of profiles" [value]="profile.idProfile">{{profile.name}}</option>
+            </select>
+            <!-- Errores del servidor -->
+            <div class="invalid-feedback">{{user.errorFormUser?.profile}}</div>
+        </div>
+        <div class="form-group col-md-3" *ngIf="user.idUser === 0">
+            <label for="inputPassword">Contraseña</label>
+            <input minlength="4" required [(ngModel)]="user.password" autocomplete="new-password" name="password" type="password" class="form-control" id="inputPassword" [ngClass]="{'is-invalid': (forma.controls['password']?.touched && forma.controls['password']?.errors ) || user.errorFormUser?.password }">
+            <div class="invalid-feedback" *ngIf="forma.controls['password']?.touched && forma.controls['password']?.errors">
+                <div *ngIf="forma.controls['username']?.errors.required">
+                    Password requerido
+                </div>
+                <div *ngIf="forma.controls['password']?.errors.minlength">
+                    Password debe ser de al menos 4 letras
+                </div>
+            </div>
+            <!-- Errores del servidor -->
+            <div class="invalid-feedback">{{user.errorFormUser?.password}}</div>
+        </div>
+        <div class="form-group col-md-3" *ngIf="user.idUser === 0">
+            <label for="inputPassword">Confirmar Contraseña</label>
+            <input minlength="4" required [(ngModel)]="user.confirmPassword" autocomplete="new-password" name="confirmPassword" type="password" class="form-control" id="inputPassword" [ngClass]="{'is-invalid': (forma.controls['confirmPassword']?.touched && (user.confirmPassword !== user.password ) ) || user.errorFormUser?.password }">
+            <div class="invalid-feedback" *ngIf="forma.controls['password']?.touched && forma.controls['password']?.errors">
+                <div *ngIf="forma.controls['username']?.errors.required">
+                    Password requerido
+                </div>
+                <div *ngIf="forma.controls['password']?.errors.minlength">
+                    Password debe ser de al menos 4 letras
+                </div>
+            </div>
+            <!-- Errores del servidor -->
+            <div class="invalid-feedback">{{user.errorFormUser?.password}}</div>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="inputEmail">Email</label>
+            <input minlength="4" required [(ngModel)]="user.email" name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="inputEmail" [ngClass]="{'is-invalid': (forma.controls['email']?.touched && forma.controls['email']?.errors ) || user.errorFormUser?.email }">
+            <div class="invalid-feedback" *ngIf="forma.controls['email']?.touched && forma.controls['email']?.errors">
+                <div *ngIf="forma.controls['email']?.errors.required">
+                    Email es requerido
+                </div>
+                <div *ngIf="forma.controls['email']?.errors.minlength">
+                    Email debe ser de al menos 4 letras
+                </div>
+            </div>
+            <!-- Errores del servidor -->
+            <div class="invalid-feedback">{{user.errorFormUser?.email}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputEmail">Fecha de Nacimiento</label>
+            <app-calendar [initialDate]="user.birthDate" (selectDate)="onSelectDate($event)"></app-calendar>
+        </div>
+    </div>
+
+    <div *ngIf="!loading && user.address">
+        <app-address [elementForm]="user"></app-address>
+    </div>
+
+    <div class="row">
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-success" [disabled]="forma.invalid || loading">
+                Guardar
+            </button> &nbsp;
+            <button type="button" class="btn btn-danger" (click)="back()">Regresar</button>
+        </div>
+    </div>
+</form>
+
+<app-loading [loading]="loading"></app-loading>

@@ -1,0 +1,42 @@
+.menu-container {
+    position: absolute;
+    top: 52px;
+    height: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding-bottom: 60px;
+}
+
+.menu-sidenav-content {
+    width: 98%;
+    /*padding-left: 15px;*/
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding: 15px;
+}
+
+.menu-sidenav {
+    padding: 5px;
+    min-width: 250px;
+    max-width: 350px;
+    z-index: 1!important;
+    box-shadow: -5px 10px 4px 9px #003F7F;
+    background-color: #f0f0f5;
+}
+
+
+/* ---------------------------------------------------
+    MEDIAQUERIES 
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .menu-sidenav {
+        padding: 5px;
+        min-width: 250px;
+        max-width: 350px;
+        z-index: 1!important;
+        box-shadow: -5px 10px 4px 9px #003F7F;
+    }
+}

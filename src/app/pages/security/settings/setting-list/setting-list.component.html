@@ -1,0 +1,165 @@
+<app-title-drawer (drawer)="drawer()" title="Configuración" image="fas fa-tools"></app-title-drawer>
+
+<form #forma="ngForm" (ngSubmit)="save(forma)" *ngIf="seeting">
+
+    <div>
+        <mat-tab-group *ngIf="!loading && seeting" mat-align-tabs="start" animationDuration="0ms">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="margin-tab-icon">style</mat-icon>
+                    Apariencia
+                </ng-template>
+
+                <div class="container-fluid pt-2">
+                    <div class="form-group row">
+                        <label for="sessionTime" class="col-sm-2 col-form-label">Tiempo de Session</label>
+                        <div class="col-sm-3">
+                            <input minlength="2" required type="number" [(ngModel)]="seeting.sessionTime" name="sessionTime" matInput class="form-control" [ngClass]="{'is-invalid': (forma.controls['sessionTime']?.touched && forma.controls['sessionTime']?.errors ) }">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="logo" class="col-sm-2 col-form-label">Logo</label>
+                        <div class="col-sm-3">
+                            <app-file-upload [hiddeLabel]="true" [elementForm]="seeting" [resourceName]="'logo'"></app-file-upload>
+                        </div>
+                        <div class="col-sm-2">
+                            <img class="s-20" width="36" height="36" [src]="seeting.logo | resourceimage" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="logoWith" class="col-sm-2 col-form-label">Ancho Logo</label>
+                        <div class="col-sm-3">
+                            <input minlength="2" required [(ngModel)]="seeting.logoWith" name="logoWith" type="text" class="form-control" id="logoWith" [ngClass]="{'is-invalid': (forma.controls['logoWith']?.touched && forma.controls['logoWith']?.errors ) }">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="logoHeigth" class="col-sm-2 col-form-label">Alto Logo</label>
+                        <div class="col-sm-3">
+                            <input minlength="2" required [(ngModel)]="seeting.logoHeigth" name="logoHeigth" type="text" class="form-control" id="logoHeigth" [ngClass]="{'is-invalid': (forma.controls['logoHeigth']?.touched && forma.controls['logoHeigth']?.errors ) }">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="logoHeigth" class="col-sm-2 col-form-label">Tipo de Fondo</label>
+                        <div class="col-sm-3">
+                            <mat-radio-group [(ngModel)]="seeting.backgroundType" name="backgroundType">
+                                <mat-radio-button *ngFor="let type of types" [value]="type.value">{{type.name}}</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" *ngIf="seeting.backgroundType===1">
+                        <label for="backgroundImage" class="col-sm-2 col-form-label">Fondo</label>
+                        <div class="col-sm-3">
+                            <app-file-upload [hiddeLabel]="true" [elementForm]="seeting" [resourceName]="'backgroundImage'"></app-file-upload>
+                        </div>
+                        <div class="col-sm-2">
+                            <img class="s-20" width="36" height="36" [src]="seeting.backgroundImage | resourceimage" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row" *ngIf="seeting.backgroundType===2">
+                        <label for="backgroundColor" class="col-sm-2 col-form-label">Color</label>
+                        <div class="col-sm-3">
+                            <input [(colorPicker)]="seeting.backgroundColor" [cpPosition]="'top-right'" [style.background]="seeting.backgroundColor" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="icoImage" class="col-sm-2 col-form-label">Icono</label>
+                        <div class="col-sm-3">
+                            <app-file-upload [hiddeLabel]="true" [elementForm]="seeting" [resourceName]="'icoImage'"></app-file-upload>
+                        </div>
+                        <div class="col-sm-2">
+                            <img class="s-20" width="36" height="36" [src]="seeting.icoImage | resourceimage" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="mainColor" class="col-sm-2 col-form-label">Color Barra Superior</label>
+                        <div class="col-sm-3">
+                            <input [(colorPicker)]="seeting.mainColor" [cpPosition]="'top-right'" [style.background]="seeting.mainColor" />
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="margin-tab-icon">mail_outline</mat-icon>
+                    Correos
+                </ng-template>
+                <div class="container-fluid pt-2">
+                    <div class="form-group row">
+                        <label for="logoHeigth" class="col-sm-2 col-form-label">Autenticación</label>
+                        <div class="col-sm-3">
+                            <!-- <input minlength="2" [(ngModel)]="seeting.mailSmtpAuth" name="mailSmtpAuth" type="text" class="form-control" id="mailSmtpAuth"> -->
+                            <div class="custom-control custom-switch">
+                              <input class="custom-control-input" type="checkbox" id="mailSmtpAuth" [(ngModel)]="seeting.mailSmtpAuthForm" name="mailSmtpAuthForm" [checked]="seeting.mailSmtpAuthForm">
+                              <label class="custom-control-label" for="mailSmtpAuth">{{seeting.mailSmtpAuthForm ? 'Habilitado' : 'Deshabilitado'}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="logoHeigth" class="col-sm-2 col-form-label">TLS</label>
+                        <div class="col-sm-3">
+                            <!-- <input minlength="2" [(ngModel)]="seeting.mailSmtpStarttls" name="mailSmtpStarttls" type="text" class="form-control" id="mailSmtpStarttls"> -->
+                            <div class="custom-control custom-switch">
+                              <input class="custom-control-input" type="checkbox" id="mailSmtpStarttls" [(ngModel)]="seeting.mailSmtpStarttlsForm" name="mailSmtpStarttlsForm" [checked]="seeting.mailSmtpStarttlsForm">
+                              <label class="custom-control-label" for="mailSmtpStarttls">{{seeting.mailSmtpStarttlsForm ? 'Habilitado' : 'Deshabilitado'}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="logoHeigth" class="col-sm-2 col-form-label">Servidor</label>
+                        <div class="col-sm-3">
+                            <input minlength="2" [(ngModel)]="seeting.mailSmtpHost" name="mailSmtpHost" type="text" class="form-control" id="mailSmtpHost">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="logoHeigth" class="col-sm-2 col-form-label">Puerto</label>
+                        <div class="col-sm-3">
+                            <input minlength="2" [(ngModel)]="seeting.mailSmtpPort" name="mailSmtpPort" type="text" class="form-control" id="mailSmtpPort">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="logoHeigth" class="col-sm-2 col-form-label">Usuario</label>
+                        <div class="col-sm-3">
+                            <input autocomplete="off" minlength="2" [(ngModel)]="seeting.mailSmtpUser" name="mailSmtpUser" type="text" class="form-control" id="mailSmtpUser">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="logoHeigth" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-3">
+                            <input minlength="2" [(ngModel)]="seeting.mailSmtpPass" name="mailSmtpPass" type="password" class="form-control" id="mailSmtpPass">
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" (click)="testMail()" class="btn btn-primary" [disabled]="forma.invalid || loading ">
+                                Test Mail
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+    <div class="row">
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-success" [disabled]="forma.invalid || loading ">
+                Guardar
+            </button>
+        </div>
+    </div>
+</form>
+
+<app-loading [loading]="loading"></app-loading>

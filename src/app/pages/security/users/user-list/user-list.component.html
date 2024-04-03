@@ -1,0 +1,70 @@
+<app-title-drawer (drawer)="drawer()" title="{{ 'user.control.title' | translate }}" image="fas fa-users"></app-title-drawer>
+
+<!-- SEARCH -->
+<div class="row row-container align-items-center">
+    <div class="col-md-2">
+        <button mat-mini-fab color="primary" [disabled]="loading" (click)="add()">
+            <mat-icon>add</mat-icon>
+        </button> &nbsp;
+        <button mat-mini-fab color="warn" [disabled]="!paginate.objectSelected || loading" (click)="edit()">
+            <mat-icon>edit</mat-icon>
+        </button>
+    </div>
+    <div class="col-md-9 text-right">
+        <input type="text" class="form-control" id="nombreBusqueda" placeholder="{{ 'user.username' | translate }}" name="searchName" [(ngModel)]="searchName" (keyup.enter)="buscar()">
+    </div>
+    <div class="col-md-1 text-right">
+        <button mat-mini-fab color="accent" [disabled]="loading" (click)="buscar()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+</div>
+
+<!-- MAIN TABLE : mostado cuando loading es falso -->
+<div *ngIf="!loading" class=" table-responsive animated fadeIn fast ">
+    <table class="table ">
+        <thead class="thead-blue ">
+            <tr>
+                <th *ngFor="let header of headers" [ngStyle]="{'width': header.width}" class="puntero" scope="col " (click)="orderingBy(header)">
+                    <i *ngIf="header.ordering === paginate.orderBy && paginate.order === 'asc'" class="fas fa-long-arrow-alt-up"></i>
+                    <i *ngIf="header.ordering === paginate.orderBy && paginate.order === 'desc'" class="fas fa-long-arrow-alt-down"></i> {{ header.name | translate }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of paginate.objects; let i = index; " [ngClass]="{'row-selected ': user.rowSelected}">
+                <td (click)="rowSelected(user)">{{user.idUser}}</td>
+                <td (click)="rowSelected(user)">{{user.name}} {{user.lastNameP}} {{user.lastNameM}}</td>
+                <td (click)="rowSelected(user)">{{user.username}}</td>
+                <td (click)="rowSelected(user)">{{user.email}}</td>
+                <td (click)="rowSelected(user)">{{user.registrationDate | date:'dd/MM/yyyy HH:mm:ss'}} </td>
+                <td (click)="rowSelected(user)" class="text-center">
+                    <ng-container *ngIf="user.statusUser == 1; else elseTemplate">
+                        <a class="mat-green-color" (click)="updateStatus(user, 0)">
+                            <img src="./assets/img/status/enabled.png" height="16" width="16" />
+                        </a>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <a class="mat-red-color" (click)="updateStatus(user, 1)">
+                            <img src="./assets/img/status/disabled.png" height="16" width="16" />
+                        </a>
+                    </ng-template>
+                </td>
+                <td (click)="rowSelected(user)">{{user.birthDate | date:'dd/MM/yyyy'}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<!-- PAGINATION-->
+<div class="row align-items-center" *ngIf="!loading">
+    <div class="col-2">
+        <app-pagination-header [actualPage]="paginate.page" [recordsTotal]="paginate.results?.total" [recordsByPage]="paginate.recordsByPage"></app-pagination-header>
+    </div>
+    <div class="col-10">
+        <app-pagination-footer [actualPage]="paginate.page" [recordsTotal]="paginate.results?.total" [recordsByPage]="paginate.recordsByPage" [totalPages]="paginate.results?.totalPages" (navigatePaginateAction)="navigatePagination($event)"></app-pagination-footer>
+    </div>
+</div>
+
+<app-loading [loading]="loading"></app-loading>

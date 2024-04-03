@@ -1,0 +1,43 @@
+/** Image proportions **/
+
+.holder {
+    width: auto;
+    display: inline-block;
+}
+
+.holder .s-40 {
+    width: 30%;
+    /* Will shrink image to 30% of its original width */
+    height: auto;
+}
+
+.holder .s-30 {
+    width: 30%;
+    /* Will shrink image to 30% of its original width */
+    height: auto;
+}
+
+.holder .s-20 {
+    width: 20%;
+    /* Will shrink image to 30% of its original width */
+    height: auto;
+}
+
+.holder .s-10 {
+    width: 10%;
+    /* Will shrink image to 30% of its original width */
+    height: auto;
+}
+
+
+/*/ Round */
+
+.round-circle {
+    border-radius: 50%;
+}
+
+.navbar-nav>li>a img {
+    margin-right: 3px;
+    width: 30px;
+    height: 30px;
+}

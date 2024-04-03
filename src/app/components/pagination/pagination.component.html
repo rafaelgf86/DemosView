@@ -1,0 +1,21 @@
+<nav aria-label="..." *ngIf="recordsTotal > recordsByPage">
+    <ul class="pagination justify-content-end flex-wrap">
+        <li class="page-item" [ngClass]="{'disabled': actualPage == 1}">
+            <a class="page-link" tabindex="-1" (click)="previousPage()">Anterior</a>
+        </li>
+        <ng-container *ngFor="let page of recordsTotal | pagination:recordsByPage; let i = index ">
+            <!--  Recorrer a 20 paginas visibles -->
+            <ng-container *ngIf="( actualPage < 10 && (i+1) <= 20 ) || 
+                                 ( ( (recordsTotal | pagination:recordsByPage).length - actualPage ) < 10 && ( (i+1) > (recordsTotal | pagination:recordsByPage).length-20 ) ) || 
+                                 ( (actualPage - (i+1)) < 10 && (actualPage -(i+1)) >= 0 ) || 
+                                 ( ( (i+1)-actualPage) <= 10 && ((i+1)-actualPage) >= 0)">
+                <li class="page-item " [ngClass]="{'active': page==actualPage }">
+                    <a class="page-link " (click)="navPage(page)">{{page}}</a>
+                </li>
+            </ng-container>
+        </ng-container>
+        <li class="page-item" [ngClass]="{'disabled': actualPage == totalPages}">
+            <a class="page-link" tabindex="-1" (click)="nextPage() ">Siguiente</a>
+        </li>
+    </ul>
+</nav>

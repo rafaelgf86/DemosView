@@ -1,0 +1,13 @@
+{
+  "user" : {
+    "control.title": "Control de Usuarios",
+    "username": "Nombre de Usuario",
+    "list.name": "Nombre",
+    "list.user": "Usuario",
+    "list.email": "Email"
+  },
+  "login.title": "Autenticación",
+  "login.user": "Usuario",
+  "login.password": "Contraseña",
+  "login.login": "Ingresar"
+}

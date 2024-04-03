@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h4 class="modal-title">Direcciones encontradas</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <p>Seleccione una dirección:</p>
+    <ul *ngIf="sepomex">
+        <li *ngFor="let sep of sepomex">
+            <a (click)="chooseAddress(sep)">{{ sep.dEstado }} {{ sep.dMnpio }} {{ sep.dAsenta }} </a>
+        </li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="activeModal.close('Close click')">Cerrar</button>
+</div>

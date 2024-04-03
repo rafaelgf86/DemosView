@@ -1,0 +1,38 @@
+<ng-container *ngIf="lateralMenu">
+    <h2 class="pt-2 text-center">{{lateralMenu.listTitle}}</h2>
+    <hr>
+
+    <ul class="list-unstyled">
+        <ng-container *ngFor="let menu of lateralMenu.menus">
+
+            <li>
+                <ng-container>
+                    <ng-container *ngIf="!menu.children || menu.children.length == 0; else elseTemplate">
+                        <a class="nav-link intx-font-title a-parent">
+                            <a [routerLink]="[menu.url]" class="intx-font-title a-parent" style="padding: 0px important!;">
+                                <i [class]="menu.icon"></i>&nbsp;{{menu.name}}
+                                <img *ngIf="menu.loadingChildren" src=".\assets\img\loadings\loader.gif" width="24px" height="24px" style="padding-bottom: 2px;" />
+                            </a>
+
+                        </a>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <a href="#{{menu.name}}-ref" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link intx-font-title a-parent">
+                            <a [routerLink]="[menu.url]" class="intx-font-title a-parent" style="padding: 0px important!;">
+                                <i [class]="menu.icon"></i>&nbsp;{{menu.name}}
+                            </a>
+                        </a>
+                    </ng-template>
+                    <!-- Hijos del menu -->
+                    <ul class="collapse list-unstyled" id="{{menu.name}}-ref" *ngIf="menu?.children">
+                        <li *ngFor="let child of menu.children">
+                            <a [routerLink]="child.url" class="intx-font-title; a-child">
+                                <i [class]="child.icon"></i>&nbsp;{{child.name}}
+                            </a>
+                        </li>
+                    </ul>
+                </ng-container>
+            </li>
+        </ng-container>
+    </ul>
+</ng-container>

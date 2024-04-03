@@ -1,0 +1,93 @@
+<header class=hero-area>
+    <div class=overlay>
+        <span></span>
+        <span></span>
+    </div>
+    <div id=home>
+        <div class=container>
+            <div class="row space-100">
+                <div class="col-lg-6 col-md-12 col-xs-12">
+                    <div class="contents">
+                        <h2 class=head-title>Plantilla <br class="d-none d-xl-block">de Angular</h2>
+                        <p>Administra y gestiona diversas aplicaciones
+                        </p>
+                        <div class=header-button>
+                            <a href="#" class="btn btn-border page-scroll" (click)="showContactModal()">Contacto</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-xs-12 p-0">
+                    <div class=intro-img>
+                        <img height="200px" width="400px" src="https://www.seekpng.com/png/full/359-3599149_process-png-business-process-management-png.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-3" *ngFor="let menu of menus" (click)="navigate(menu.url)">
+            <div class="box">
+                <div class="box">
+                    <div class="our-services {{menu.classShortAccess}}">
+                        <div class="icon"> <img src="{{menu.iconShortAccess}}" width="98" height="98"> </div>
+                        <h4>{{menu.name}}</h4>
+                        <p>{{menu.descriptionShortAccess}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</header>
+
+<app-loading [loading]="loading"></app-loading>
+
+
+
+
+<!--
+<section id=services class=section>
+    <div class=container>
+        <div class="row justify-content-center justify-content-md-start">
+
+            <div class="col-lg-4 col-md-6 col-xs-12 col-sm-10">
+                <div class="services-item text-center">
+                    <div class=icon>
+                        <i class="lni lni-cog"></i>
+                    </div>
+                    <h4>Bootstrap 4</h4>
+                    <p>Share processes and data secure lona need to know basis Our team assured your web site is always safe.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-6 col-xs-12 col-sm-10">
+                <div class="services-item text-center">
+                    <div class=icon>
+                        <i class="lni lni-brush"></i>
+                    </div>
+                    <h4>Slick Design</h4>
+                    <p>Share processes and data secure lona need to know basis Our team assured your web site is always safe.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-6 col-xs-12 col-sm-10">
+                <div class="services-item text-center">
+                    <div class=icon>
+                        <i class="lni lni-heart"></i>
+                    </div>
+                    <h4>Crafted with Love</h4>
+                    <p>Share processes and data secure lona need to know basis Our team assured your web site is always safe.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+-->

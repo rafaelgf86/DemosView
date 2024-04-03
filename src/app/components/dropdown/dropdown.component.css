@@ -1,0 +1,51 @@
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block !important;
+    position: absolute !important;
+    top: 50% !important;
+    right: 20px !important;
+    transform: translateY(-50%) !important;
+}
+
+
+/*
+a,
+a:hover,
+a:focus {
+    color: #007bff;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+*/
+
+ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+
+ul p {
+    /* color: #fff; */
+    padding: 10px;
+}
+
+ul li a {
+    padding: 5px;
+    font-size: 1.1em;
+    display: block;
+}
+
+ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+ul li.active>a,
+a[aria-expanded="true"] {
+    /*
+ color: #fff;
+    background: #6d7fcc; 
+*/
+}

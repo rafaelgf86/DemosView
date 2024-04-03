@@ -1,0 +1,6 @@
+<label for="inputBusinessName" *ngIf="elementForm && !hiddeLabel">{{textField}}</label>
+<div class="custom-file" *ngIf="elementForm">
+    <input [ngClass]="{'is-invalid': errorFile || errorFileMessage !== ''}" #file type="file" accept='{{ accept }}' class="custom-file-input" (change)="fileChangeEvent(file)">
+    <label class="custom-file-label" for="pic">{{textInputFile}}</label>
+    <div class="invalid-feedback">{{errorFileMessage}}</div>
+</div>

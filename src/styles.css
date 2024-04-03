@@ -1,0 +1,250 @@
+@import "styles-images.css";
+body {
+    overflow: hidden;
+}
+
+.main-container {
+    /* margin-top: 40px !important; */
+    padding-top: 5px;
+    margin-bottom: 5px;
+    /* height: 85% !important; */
+    overflow: hidden;
+}
+
+.row-title {
+    padding-top: 15px;
+}
+
+.row-container {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.img-thumb {
+    width: 40px;
+    height: 40px;
+}
+
+.img-circle {
+    border-radius: 100%;
+    width: 150px;
+}
+
+.button-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.puntero {
+    cursor: pointer !important;
+}
+
+.w120 {
+    width: 230px;
+}
+
+hr {
+    border-top-color: #003F7F !important;
+}
+
+table .thead-blue th {
+    color: white;
+    background-color: #004e9c;
+    border-color: #dee2e6;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+/* Animaciones */
+
+.option-link {
+    padding: 10px
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.fast {
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+.container-intx {
+    margin-top: 50px !important;
+}
+
+.table-intx {
+    background-color: #3f51b5 !important;
+    color: white !important;
+    text-align: left !important;
+}
+
+.rowSelected {
+    background-color: #bdc7d6 !important;
+}
+
+.button-image-disbled {
+    opacity: 0.5
+}
+
+a {
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #3f51b5 !important;
+}
+
+.select-80 {
+    width: 80% !important;
+}
+
+.select-50 {
+    width: 50% !important;
+}
+
+.select-40 {
+    width: 40% !important;
+}
+
+.loading-div {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.loading-text {
+    font-family: "Open Sans Regular";
+    font-size: 30px;
+    font-style: italic;
+    font-weight: bold;
+    color: #909fa6;
+    /* font-variant: small-caps; */
+}
+
+.scroll-hor {
+    height: 65vh;
+    width: 100%;
+    overflow: auto;
+}
+
+.scroll-auto-to-max-percent {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.scroll-vertical-auto {
+    height: 88vh;
+    overflow-y: auto;
+}
+
+.col-size {
+    min-width: 250px !important;
+    vertical-align: middle !important;
+    white-space: nowrap;
+    -moz-user-select: none;
+}
+
+
+/* permite ver el menu del click derecho del plugin ngx-contextmenu en los modales */
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+    z-index: 99999 !important;
+}
+
+.table td,
+.table th {
+    padding: .5rem !important;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: small;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1 {
+    color: #003F7F !important;
+    /*font-size: 1.7rem !important;*/
+}
+
+.a-parent {
+    color: black;
+    text-decoration: none !important;
+    transition: all 0.3s;
+}
+
+.a-child {
+    color: #007bff;
+    text-decoration: none !important;
+    transition: all 0.3s;
+    padding-left: 27px !important;
+}
+
+.title-control {
+    font-size: 20px;
+}
+
+.row-selected {
+    background-color: #bdc7d6;
+}
+
+.mat-yellow {
+    background-color: yellow;
+    color: #fff;
+}
+
+.mat-green {
+    background-color: green;
+    color: #fff;
+}
+
+.mat-purple {
+    background-color: purple;
+    color: #fff;
+}
+
+
+/** Para lightbox **/
+
+.g-image-item {
+    height: 90% !important;
+}

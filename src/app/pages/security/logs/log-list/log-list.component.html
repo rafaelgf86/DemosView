@@ -1,0 +1,62 @@
+<app-title-drawer (drawer)="drawer()" title="Consulta de Bitácora" image="fas fa-receipt"></app-title-drawer>
+
+<!-- SEARCH -->
+<div class="row row-container align-items-center">
+    <div class="col-md-4">
+        <button mat-mini-fab color="primary" [disabled]="!paginate.objectSelected || loading" (click)="review(paginate.objectSelected)">
+            <mat-icon>rate_review</mat-icon>
+        </button>
+    </div>
+    <div class="col-md-6 text-right">
+        <!-- <span *ngIf="loadingEstados" class="form-control-plaintext"><app-loading-img></app-loading-img></span> -->
+        <select [(ngModel)]="searchLogType" name="idLogType" id="inputLogType" class="form-control custom-select">
+            <option selected value="0">Seleccione un tipo de registro</option>
+            <option *ngFor="let logType of logTypes" [value]="logType.idLogType">{{logType.logTypeName}}</option>
+        </select>
+
+    </div>
+    <div class="col-md-1 text-right">
+        <mat-checkbox [checked]="searchError" (change)="searchError = !searchError">Solo errores</mat-checkbox>
+        <!-- <input [(ngModel)]="searchError" type="checkbox"/>Solo errores -->
+    </div>
+    <div class="col-md-1 text-right">
+        <button mat-mini-fab color="accent" [disabled]="loading" (click)="buscar()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+</div>
+
+<!-- MAIN TABLE : mostado cuando loading es falso -->
+<div *ngIf="!loading" class=" table-responsive animated fadeIn fast ">
+    <table class="table ">
+        <thead class="thead-blue ">
+            <th *ngFor="let header of headers" [ngStyle]="{'width': header.width}" class="puntero" scope="col " (click)="orderingBy(header)">
+                <i *ngIf="header.ordering === paginate.orderBy && paginate.order === 'asc'" class="fas fa-long-arrow-alt-up"></i>
+                <i *ngIf="header.ordering === paginate.orderBy && paginate.order === 'desc'" class="fas fa-long-arrow-alt-down"></i> {{ header.name }}
+            </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let log of paginate.objects; let i = index; " [ngClass]="{'row-selected ': log.rowSelected}">
+                <td (click)="rowSelected(log)" (dblclick)="review(log)" [ngClass]="{'text-danger': log.error}">{{log.idLog}}</td>
+                <td (click)="rowSelected(log)" (dblclick)="review(log)" [ngClass]="{'text-danger': log.error}">{{log.logType?.logTypeName}}</td>
+                <td (click)="rowSelected(log)" (dblclick)="review(log)" [ngClass]="{'text-danger': log.error}">{{log.description}}</td>
+                <td (click)="rowSelected(log)" (dblclick)="review(log)" [ngClass]="{'text-danger': log.error}">{{log.serviceName}}</td>
+                <td (click)="rowSelected(log)" (dblclick)="review(log)" [ngClass]="{'text-danger': log.error}">{{log.registrationDate | date:'dd/MM/yyyy HH:mm:ss'}} </td>
+                <td (click)="rowSelected(log)" (dblclick)="review(log)" [ngClass]="{'text-danger': log.error}">{{log.username}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<!-- PAGINATION-->
+<div class="row align-items-center" *ngIf="!loading">
+    <div class="col-2">
+        <app-pagination-header [actualPage]="paginate.page" [recordsTotal]="paginate.results?.total" [recordsByPage]="paginate.recordsByPage"></app-pagination-header>
+    </div>
+    <div class="col-10">
+        <app-pagination-footer [actualPage]="paginate.page" [recordsTotal]="paginate.results?.total" [recordsByPage]="paginate.recordsByPage" [totalPages]="paginate.results?.totalPages" (navigatePaginateAction)="navigatePagination($event)"></app-pagination-footer>
+    </div>
+</div>
+
+<app-loading [loading]="loading"></app-loading>

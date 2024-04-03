@@ -1,0 +1,96 @@
+.bg-intx {
+    /* background-color: white !important; */
+    /* border-bottom: 5px solid #3f51b5;*/
+    background-color: hsla(0, 0%, 100%, .98);
+    /** [box-shadow] Se coloca con base en el parametro de la empresa **/
+    /* box-shadow: 0 2px 4px 0 #003F7F; */
+}
+
+.intx-toggler.navbar-toggler {
+    border-color: #3f51b5 !important;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu a::after {
+    transform: rotate(-90deg);
+    position: absolute;
+    right: 6px;
+    top: .8em;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-left: .1rem;
+    margin-right: .1rem;
+}
+
+.intx-font {
+    font-family: 'roboto', Arial, Helvetica, sans-serif;
+    font-size: 1.200769em;
+    color: black !important;
+}
+
+.intx-font-title {
+    font-family: 'roboto', Arial, Helvetica, sans-serif;
+    font-size: 1.230769em;
+    /*color: black !important;*/
+}
+
+.intx-top {
+    /* margin-top: -10px !important; */
+    margin-top: 0px !important;
+}
+
+.navbar-brand {
+    padding-left: 40px !important;
+    margin-right: 50px !important;
+}
+
+.logo-intx {
+    height: 40px;
+}
+
+.active {
+    /* color: black !important;*/
+    /* font-weight: bold; */
+    background-color: #eeeeee !important;
+}
+
+.navbar {
+    z-index: 2 !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+
+/*.navbar .navbar-nav>li>a,*/
+
+.navbar .navbar-nav>li>a:hover,
+.navbar .navbar-nav>li>a:focus {
+    background-color: #eeeeee !important;
+    color: #555555;
+}
+
+.navbar-nav>li>a {
+    line-height: 34px;
+}
+
+.dropdown-item {
+    line-height: 34px !important;
+    padding: .0rem 1.5rem !important;
+}
+
+.dropdown-divider {
+    margin: 0rem 0 !important;
+}
+
+.project-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}

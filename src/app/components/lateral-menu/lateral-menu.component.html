@@ -1,0 +1,31 @@
+<mat-drawer-container class="menu-container">
+
+    <mat-drawer #drawer class="menu-sidenav" opened mode="side">
+        <app-dropdown [lateralMenu]="lateralMenu" (clickAction)="click($event)"></app-dropdown>
+    </mat-drawer>
+
+    <div class="menu-sidenav-content">
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
+
+        <div class="container-fluid mb-3" *ngIf="showCentralMenu && lateralMenu && lateralMenu?.menus[0]?.descriptionShortAccess ">
+            <div class="text-center mt-3">
+                <h1>Servicios</h1>
+            </div>
+            <div class="row pt-5">
+                <div class="col-md-4" *ngFor="let menu of lateralMenu.menus" (click)="navigate(menu.url)">
+                    <div class="box">
+                        <div class="our-services {{menu.classShortAccess}}">
+                            <div class="icon"> <img src="{{menu.iconShortAccess}}" width="98" height="98"> </div>
+                            <h4>{{menu.name}}</h4>
+                            <p>{{menu.descriptionShortAccess}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</mat-drawer-container>
+
+<app-toast></app-toast>
